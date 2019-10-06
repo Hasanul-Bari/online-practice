@@ -9,10 +9,10 @@ int main()
 {
     faster
 
-    int k;
+    int k,m,n;
     cin>>k;
 
-    string s="aeiou";
+    string s="aeioueauioioaueoueaiuioea";
 
 
     bool c=false;
@@ -20,22 +20,55 @@ int main()
     {
         if(k%i==0 && i>=5 &&  k/i>=5)
         {
+            m=i, n=k/i;
             c=true;
             break;
         }
     }
 
+    //cout<<m<<" "<<n<<endl;
+
     if(c==true)
     {
-        for(int i=0,j=0; i<k; i++)
+        char a[m+1][n+1],l=0;
+
+        for(int i=0; i<m; i++)
         {
-            cout<<s[j];
-            j++;
-            if(j==5)
-                j=0;
+            for(int j=0; j<5; j++)
+            {
+                a[i][j]=s[l];
+                l++;
+                if(l==25)
+                    l=0;
+            }
+
         }
 
-        cout<<endl;
+        for(int j=5; j<n; j++)
+        {
+            l=0;
+            for(int i=0; i<m; i++)
+            {
+                a[i][j]=s[l];
+                l++;
+                if(l==5)
+                    l=0;
+            }
+        }
+
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                cout<<a[i][j];
+
+            }
+
+            //cout<<endl;
+
+        }
+
+
     }
     else
         cout<<-1<<endl;
