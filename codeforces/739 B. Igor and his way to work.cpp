@@ -8,17 +8,17 @@ struct cell
 
 int p1[1005][1005];
 int p2[1005][1005];
-int t1=0,t2=0,cc=0;
+int t1=0,t2=0;
 
-void printpath(int x2,int y2,int x1,int y1)
+int printpath(int x2,int y2,int x1,int y1,int cc)
 {
 
     if(x2==x1 && y2==y1)
     {
         //cout<<x2<<" "<<y2<<endl;
-        return ;
+        return cc;
     }
-    printpath(p1[x2][y2],p2[x2][y2],x1,y1);
+    printpath(p1[x2][y2],p2[x2][y2],x1,y1,cc);
 
     //cout<<p1[x2][y2]<<" "<<p2[x2][y2]<<" "<<x2<<" "<<y2<<endl;
 
@@ -118,11 +118,11 @@ int main()
         }
     }
 
-    printpath(des.x,des.y,src.x,src.y);
+    int x=printpath(des.x,des.y,src.x,src.y,0);
 
-    cout<<cc<<endl;
+    cout<<x<<endl;
 
-    if(cc<=2)
+    if(x<=2)
         cout<<"YES"<<endl;
     else
         cout<<"NO"<<endl;
