@@ -7,7 +7,7 @@ using namespace std;
 int wt[102];
 int p[102];
 
-int knapsack(int c, int n)
+void knapsack(int c, int n)
 {
     int k[n+1][c+1];
 
@@ -16,23 +16,29 @@ int knapsack(int c, int n)
         for(int w=0; w<=c; w++)
         {
 
+
+
             if(i==0 || w==0)
                 k[i][w]=0;
 
             else if(wt[i]<=w)
+            {
+
                 k[i][w]=max( k[i-1][w], p[i]+k[i-1][w-wt[i]] );
+            }
+
             else
                 k[i][w]=k[i-1][w];
 
 
-            if(k[i][w]>2000)
-                k[i][w]=k[i][w]-200;
+            /*if(k[i][w]>2000)
+                k[i][w]=k[i][w]-200;*/
 
         }
     }
 
 
-    return k[n][c];
+    cout<<k[n][c]<<" "<<k[n][c-200]<<endl;
 }
 
 
@@ -40,18 +46,20 @@ int main()
 {
     faster;
 
-    int n,c;
+    int n,c,cc;
 
 
     while(cin>>c>>n)
     {
+
+        c=c+200;
 
 
         for(int i=1; i<=n; i++)
             cin>>wt[i]>>p[i];
 
 
-        cout<<knapsack(c,n)<<endl;
+        knapsack(c,n);
 
     }
 
