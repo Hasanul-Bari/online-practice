@@ -7,8 +7,13 @@ const double PI = acos(-1.0);
 using namespace std;
 
 
-void computelps(int lps[],int px,string patt)
+int computelps(string patt)
 {
+    int px=patt.length();
+
+    int lps[px];
+
+
     lps[0]=0;
 
     int len=0,i;
@@ -35,10 +40,17 @@ void computelps(int lps[],int px,string patt)
             }
         }
     }
+
+
+    /*for(int i=0; i<px; i++)
+        cout<<lps[i]<<" ";
+    cout<<endl;*/
+
+    return lps[px-1];
 }
 
 
-void kmp(string text,string patt)
+/*void kmp(string text,string patt)
 {
     int tx=text.length();
     int px=patt.length();
@@ -48,9 +60,9 @@ void kmp(string text,string patt)
     computelps(lps,px,patt);
 
 
-    /*for(int i=0; i<px; i++)
+    for(int i=0; i<px; i++)
         cout<<lps[i]<<" ";
-    cout<<endl;*/
+    cout<<endl;
 
     for(int i=0, j=0; i<tx; )
     {
@@ -61,8 +73,7 @@ void kmp(string text,string patt)
 
             if(j==px)
             {
-                cout<<"y"<<endl;
-                return;
+                cout<<"Found at index : "<<i-px<<endl;
                 j=lps[j-1];
             }
         }
@@ -74,9 +85,10 @@ void kmp(string text,string patt)
                 i++;
         }
     }
-    cout<<"n"<<endl;
 
-}
+}*/
+
+
 
 
 
@@ -84,24 +96,51 @@ int main()
 {
     faster
 
-
-    int t,q;
-    cin>>t;
-
-
-    string s,h;
-    for(int j=0; j<t; j++)
+    string patt,rpatt;
+    while(cin>>patt)
     {
-        cin>>s>>q;
-        for(int i=0; i<q; i++)
-        {
-            cin>>h;
-            kmp(s,h);
 
-        }
+
+
+        int px=patt.length();
+
+        rpatt=patt;
+
+        reverse(rpatt.begin(),rpatt.end());
+
+
+        rpatt=rpatt+patt;
+
+
+
+        //cout<<rpatt<<endl;
+
+
+
+        int z=computelps(rpatt);
+
+        cout<<patt;
+        for(int i=z; i<px; i++)
+            cout<<rpatt[i];
+        cout<<endl;
 
 
     }
+
+
+
     return 0;
 }
 
+
+/*
+https://www.geeksforgeeks.org/minimum-characters-added-front-make-string-palindrome/
+
+*/
+
+
+/*
+vpltefcfetlpvv
+judge e vul ase ai case er jnno
+rev ar patt maje tai sybmol dewa drkr
+*/
