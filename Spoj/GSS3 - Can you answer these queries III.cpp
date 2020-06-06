@@ -43,7 +43,7 @@ void seg(int node,int b,int e)
     tree[node].pref=max(tree[left].pref, tree[left].sum+tree[right].pref);
     tree[node].suff=max(tree[right].suff, tree[right].sum+tree[left].suff);
 
-    tree[node].ans =max( max(tree[left].ans,tree[right].ans) , tree[left].suff+tree[right].pref);
+    tree[node].ans =max( max(tree[left].ans,tree[right].ans), tree[left].suff+tree[right].pref);
 }
 
 info query(int node,int b,int e,int i,int j)
@@ -85,33 +85,43 @@ info query(int node,int b,int e,int i,int j)
     z.pref=max(l.pref, l.sum+r.pref);
     z.suff=max(r.suff, r.sum+l.suff);
 
-    z.ans =max( max(l.ans,r.ans) , l.suff+r.pref);
+    z.ans =max( max(l.ans,r.ans), l.suff+r.pref);
 
 
     return z;
 }
 
 
-/*void update(int node,int b,int e,int i,int value)
+void update(int node,int b,int e,int i,int value)
 {
     if(i>e || i<b)                 ///outside segment
         return;
 
     if(i<=b && e<=i)              ///relevant segment
     {
-        tree[node]=value;
+        tree[node].sum=value;
+        tree[node].pref=value;
+        tree[node].suff=value;
+        tree[node].ans=value;
         return;
     }
+
     int left=node*2;
     int right=(node*2)+1;
 
     int mid=(b+e)/2;
+
     update(left,b,mid,i,value);
     update(right,mid+1,e,i,value);
 
-    tree[node]=tree[left]+tree[right];
+    tree[node].sum=tree[left].sum+tree[right].sum;
+    tree[node].pref=max(tree[left].pref, tree[left].sum+tree[right].pref);
+    tree[node].suff=max(tree[right].suff, tree[right].sum+tree[left].suff);
 
-}*/
+    tree[node].ans =max( max(tree[left].ans,tree[right].ans), tree[left].suff+tree[right].pref);
+
+
+}
 
 
 
@@ -119,7 +129,7 @@ int main()
 {
     faster
 
-    int n,q,x,y,t;
+    int n,q,x,y,t,p;
 
 
     cin>>n;
@@ -129,31 +139,31 @@ int main()
         cin>>a[i];
     }
 
-    /*for(int i=1; i<=4*n; i++)
-            cout<<tree[i].ans<<" ** "<<tree[i].sum;
-        cout<<endl;*/
-
 
     seg(1,1,n);
 
     cin>>q;
     while(q--)
     {
-        cin>>x>>y;
-        info z;
-        z=query(1,1,n,x,y);
-        cout<<z.ans<<endl;
-        //cout<<mx<<endl;
+        cin>>p>>x>>y;
 
-        /*for(int i=1; i<=4*n; i++)
-            cout<<tree[i]<<" ";
-        cout<<endl;*/
+        if(p==0)
+        {
+            update(1,1,n,x,y);
+        }
+        else
+        {
+            info z;
+            z=query(1,1,n,x,y);
+            cout<<z.ans<<endl;
+        }
 
     }
 
 
     return 0;
 }
+
 
 
 
