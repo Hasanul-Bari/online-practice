@@ -16,7 +16,9 @@ int main()
         int x=s+e;
         if(x>i)
         {
-            cout<<((x-i)/2)+((x-i)%2)<<endl;
+            x=((x-i)/2)+((x-i)%2);
+            //cout<<"x= "<<x<<endl;
+            cout<<min(x,e+1)<<endl;
         }
         else
             cout<<0<<endl;
