@@ -11,77 +11,85 @@ int main()
     faster
 
 
-    int n,x,y,t;
+    int n,x,y;
     cin>>n;
 
-    map<int,int> m,m1,m3;
+    map<int,int> m,m2,mx;
 
     for(int i=1; i<=n; i++)
     {
         cin>>x>>y;
 
-        if(y!=0)
+
+
+        if(y==0)
         {
-            m[x]=y;
+            y=-1;
+        }
+        else if(x==0)
+        {
+            x=-1;
+        }
+
+        m[x]=y;
+
+        m2[x]++;
+        m2[y]++;
+
+        mx[x]++;
 
 
+    }
+
+    int f;
+    for(auto p : m2)
+    {
+        if(p.second==1 && p.first>0 && mx[p.first]>0)
+            f=p.first;
+    }
+
+    //cout<<f<<endl;
+
+    vector<int> v1,v2;
+
+    x=f;
+    while(x>0)
+    {
+        v1.pb(x);
+        x=m[x];
+
+    }
+
+
+    x=-1;
+
+    while(m[x]>0)
+    {
+        v2.pb(m[x]);
+        x=m[x];
+
+    }
+
+
+    for(int i=0,j=0,k=0; i<n; i++)
+    {
+        if(i%2==0)
+        {
+            cout<<v1[j]<<" ";
+            j++;
 
         }
         else
         {
-            t=x;
+            cout<<v2[k]<<" ";
+            k++;
         }
-
-
 
     }
 
+    cout<<endl;
 
 
-
-    if(n%2==0)
-    {
-        int tt=t;
-
-        while(m1[tt]!=0)
-        {
-            tt=m1[tt];
-        }
-        //cout<<t<<" **"<<tt<<endl;
-
-        bool hp=false;
-        int a=m[0],b=tt;
-
-        for(int i=1; i<=n; i++)
-        {
-            if(hp==true)
-            {
-                cout<<a<<" ";
-                a=m[a];
-                hp=false;
-            }
-            else
-            {
-                cout<<b<<" ";
-                b=m[b];
-                hp=true;
-            }
-        }
-        cout<<endl;
-    }
-    else
-    {
-        int tt=0;
-
-        while(m1[tt]!=0)
-        {
-            tt=m1[tt];
-
-        }
-
-
-
-    }
 
 
 
